@@ -2,6 +2,7 @@ package br.com.elojademusica.controller;
 
 import br.com.elojademusica.dao.ProdutoDao;
 import br.com.elojademusica.model.Produto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,8 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    private ProdutoDao produtoDao = new ProdutoDao();
+    @Autowired
+    private ProdutoDao produtoDao;
 
     @RequestMapping("/")
     public String home() {
@@ -25,7 +27,7 @@ public class HomeController {
 
     @RequestMapping("/listaProdutos")
     public String getProdutos(Model model) {
-        List<Produto> produtos = produtoDao.getListaProdutos();
+        List<Produto> produtos = produtoDao.getTodosProdutos();
         model.addAttribute("produtos", produtos);
 
         return "listaProdutos";

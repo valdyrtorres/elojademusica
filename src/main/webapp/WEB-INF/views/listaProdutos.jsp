@@ -28,7 +28,7 @@
                    <td>${produto.categoria}</td>
                    <td>${produto.condicao}</td>
                    <td>R$ ${produto.preco}</td>
-                   <td><a href="<spring:url value="/listaProdutos/visaoProduto/${produto.id}" />">
+                   <td><a href="<spring:url value="/listaProdutos/visaoProduto/${produto.idProduto}" />">
                        <span class="glyphicon glyphicon-info-sign"></span></a></td>
                 </tr>
             </c:forEach>

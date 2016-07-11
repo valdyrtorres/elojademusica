@@ -1,11 +1,20 @@
 package br.com.elojademusica.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by valdirborges on 06/07/2016.
  */
+
+@Entity
 public class Produto {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String idProduto;
     private String nome;
     private String categoria;
     private String descricao;
@@ -15,12 +24,12 @@ public class Produto {
     private int unidadeEmEstoque;
     private String manufaturador;
 
-    public String getId() {
-        return id;
+    public String getIdProduto() {
+        return idProduto;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdProduto(String idProduto) {
+        this.idProduto = idProduto;
     }
 
     public String getNome() {
