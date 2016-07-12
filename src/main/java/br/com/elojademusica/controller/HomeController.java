@@ -40,4 +40,29 @@ public class HomeController {
 
         return "visaoProduto";
     }
+
+    @RequestMapping("/admin")
+    public String paginaAdmin() {
+        return "admin";
+    }
+
+    @RequestMapping("/admin/inventarioProdutos")
+    public String inventarioProduto(Model model) {
+        List<Produto> produtos = produtoDao.getTodosProdutos();
+        model.addAttribute("produtos", produtos);
+
+        return "inventarioProdutos";
+    }
+
+    @RequestMapping("/admin/inventarioProdutos/adicionarProduto")
+    public String adicionarProduto(Model model) {
+        Produto produto = new Produto();
+        produto.setCategoria("instrumento");
+        produto.setCondicao("novo");
+        produto.setStatus("ativo");
+
+        model.addAttribute("produto", produto);
+
+        return "adicionarProduto";
+    }
 }
