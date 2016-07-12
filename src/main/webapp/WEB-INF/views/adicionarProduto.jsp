@@ -9,7 +9,8 @@
             <p class="lead">Preencha abaixo para adicionar o Produto</p>
         </div>
 
-        <form:form action="#" method="post" commandName="produto">
+        <form:form action="${pageContext.request.contextPath}/admin/inventarioProdutos/adicionarProduto" method="post"
+                   commandName="produto" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nome">Nome</label>
             <form:input path="nome" id="nome" class="form-Control" />
@@ -25,6 +26,52 @@
                                                              value="acessorio" />Acess&oacute;rio</label>
 
         </div>
+
+        <div class="form-group">
+            <label for="descricao">Descri&ccedil;&atilde;o</label>
+            <form:textarea path="descricao" id="descricao" class="form-Control" />
+        </div>
+
+        <div class="form-group">
+            <label for="preco">Pre&ccedil;o</label>
+            <form:input path="preco" id="preco" class="form-Control" />
+        </div>
+
+        <div class="form-group">
+            <label for="condicao">Condi&ccedil;&atilde;o</label>
+            <label class="checkbox-inline"><form:radiobutton path="condicao" id="condicao"
+                                                             value="novo" />Novo</label>
+            <label class="checkbox-inline"><form:radiobutton path="condicao" id="condicao"
+                                                             value="usado" />Usado</label>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <label class="checkbox-inline"><form:radiobutton path="status" id="status"
+                                                             value="ativo" />Ativo</label>
+            <label class="checkbox-inline"><form:radiobutton path="status" id="statuso"
+                                                             value="inativo" />Inativo</label>
+        </div>
+
+        <div class="form-group">
+            <label for="unidadeEmEstoque">Unidade em Estoque</label>
+            <form:input path="unidadeEmEstoque" id="unidadeEmEstoque" class="form-Control" />
+        </div>
+
+        <div class="form-group">
+            <label for="manufaturador">Manufaturador</label>
+            <form:input path="manufaturador" id="manufaturador" class="form-Control" />
+        </div>
+
+        <div class="form-group">
+            <label for="control-label">Upload de imagens</label>
+            <form:input id="imagemProduto" path="imagemProduto" type="file" class="form-input-large" />
+
+        </div>
+
+        </br> </br>
+        <input type="submit" value="submit" class="btn btn-default">
+        <a href="<c:url value="/admin/inventarioProdutos" />" class="btn btn-default">Cancelar</a>
         </form:form>
 
         <%@include file="/WEB-INF/views/template/footer.jsp"%>

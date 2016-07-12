@@ -1,9 +1,8 @@
 package br.com.elojademusica.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.*;
 
 /**
  * Created by valdirborges on 06/07/2016.
@@ -23,6 +22,9 @@ public class Produto {
     private String status;
     private int unidadeEmEstoque;
     private String manufaturador;
+
+    @Transient
+    private MultipartFile imagemProduto;
 
     public String getIdProduto() {
         return idProduto;
@@ -94,5 +96,13 @@ public class Produto {
 
     public void setManufaturador(String manufaturador) {
         this.manufaturador = manufaturador;
+    }
+
+    public MultipartFile getImagemProduto() {
+        return imagemProduto;
+    }
+
+    public void setImagemProduto(MultipartFile imagemProduto) {
+        this.imagemProduto = imagemProduto;
     }
 }

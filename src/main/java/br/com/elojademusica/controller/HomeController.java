@@ -5,10 +5,13 @@ import br.com.elojademusica.model.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -16,6 +19,8 @@ import java.util.List;
  */
 @Controller
 public class HomeController {
+
+    private Path caminho;
 
     @Autowired
     private ProdutoDao produtoDao;
@@ -65,4 +70,34 @@ public class HomeController {
 
         return "adicionarProduto";
     }
+
+    @RequestMapping(value = "/admin/inventarioProdutos/adicionarProduto", method = RequestMethod.POST)
+    public String adicionarProdutoPost(@ModelAttribute("produto") Produto produto, HttpServletRequest request) {
+        produtoDao.adicionarProduto(produto);
+
+        MultipartFile imagemProduto = produto.getImagemProduto();
+
+        String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
+
+        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\images\\"+produto.getIdProduto()+".png");
+
+        if(imagemProduto != null && imagemProduto.isEmpty()) {
+            try {
+                imagemProduto.transferTo(new File(caminho.toString()));
+            } catch (Exception e) {
+                throw new RuntimeException("Falha ao salvar a imagem do produto");
+            }
+        }
+
+        return "redirect:/admin/inventarioProdutos";
+    }
+
+    @RequestMapping("/admin/inventarioProdutos/deleteProduto/{id}")
+    public String deleteProduto(@PathVariable String id, Model model) {
+
+        produtoDao.deleteProduto(id);
+
+        return "redirect:/admin/inventarioProdutos";
+    }
+
 }

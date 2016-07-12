@@ -36,7 +36,10 @@
                     <td>${produto.condicao}</td>
                     <td>R$ ${produto.preco}</td>
                     <td><a href="<spring:url value="/listaProdutos/visaoProduto/${produto.idProduto}" />">
-                        <span class="glyphicon glyphicon-info-sign"></span></a></td>
+                        <span class="glyphicon glyphicon-info-sign"></span></a>
+                        <a href="<spring:url value="/admin/inventarioProdutos/deleteProduto/${produto.idProduto}" />">
+                            <span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
