@@ -11,6 +11,7 @@
 
         <form:form action="${pageContext.request.contextPath}/admin/inventarioProdutos/adicionarProduto" method="post"
                    commandName="produto" enctype="multipart/form-data">
+
         <div class="form-group">
             <label for="nome">Nome</label>
             <form:input path="nome" id="nome" class="form-Control" />

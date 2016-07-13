@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -71,6 +72,15 @@ public class HomeController {
         return "adicionarProduto";
     }
 
+    /*
+    @RequestMapping(value = "/admin/inventarioProdutos/adicionarProduto", method = RequestMethod.POST)
+    public String adicionarProdutoPost(@ModelAttribute("produto") Produto produto) {
+        produtoDao.adicionarProduto(produto);
+
+        return "redirect:/admin/inventarioProdutos";
+    }
+    */
+
     @RequestMapping(value = "/admin/inventarioProdutos/adicionarProduto", method = RequestMethod.POST)
     public String adicionarProdutoPost(@ModelAttribute("produto") Produto produto, HttpServletRequest request) {
         produtoDao.adicionarProduto(produto);
@@ -79,12 +89,13 @@ public class HomeController {
 
         String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
 
-        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\images\\"+produto.getIdProduto()+".png");
+        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\"+produto.getIdProduto()+".png");
 
         if(imagemProduto != null && imagemProduto.isEmpty()) {
             try {
                 imagemProduto.transferTo(new File(caminho.toString()));
             } catch (Exception e) {
+                e.printStackTrace();
                 throw new RuntimeException("Falha ao salvar a imagem do produto");
             }
         }
