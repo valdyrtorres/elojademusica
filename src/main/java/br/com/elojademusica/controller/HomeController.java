@@ -2,6 +2,7 @@ package br.com.elojademusica.controller;
 
 import br.com.elojademusica.dao.ProdutoDao;
 import br.com.elojademusica.model.Produto;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -88,7 +90,6 @@ public class HomeController {
         MultipartFile imagemProduto = produto.getImagemProduto();
 
         String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
-
         caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\"+produto.getIdProduto()+".png");
 
         if(imagemProduto != null && !imagemProduto.isEmpty()) {
@@ -104,7 +105,17 @@ public class HomeController {
     }
 
     @RequestMapping("/admin/inventarioProdutos/deleteProduto/{id}")
-    public String deleteProduto(@PathVariable String id, Model model) {
+    public String deleteProduto(@PathVariable String id, Model model, HttpServletRequest request) {
+        String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
+        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\"+id+".png");
+
+        if (Files.exists(caminho)) {
+            try {
+                Files.delete(caminho);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         produtoDao.deleteProduto(id);
 
