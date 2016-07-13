@@ -65,7 +65,7 @@
         </div>
 
         <div class="form-group">
-            <label for="control-label">Upload de imagens</label>
+            <label class="control-label" for="imagemProduto">Upload de imagens</label>
             <form:input id="imagemProduto" path="imagemProduto" type="file" class="form-input-large" />
 
         </div>

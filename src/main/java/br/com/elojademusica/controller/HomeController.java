@@ -91,12 +91,12 @@ public class HomeController {
 
         caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\"+produto.getIdProduto()+".png");
 
-        if(imagemProduto != null && imagemProduto.isEmpty()) {
+        if(imagemProduto != null && !imagemProduto.isEmpty()) {
             try {
                 imagemProduto.transferTo(new File(caminho.toString()));
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new RuntimeException("Falha ao salvar a imagem do produto");
+                throw new RuntimeException("Falha ao salvar a imagem do produto", e);
             }
         }
 

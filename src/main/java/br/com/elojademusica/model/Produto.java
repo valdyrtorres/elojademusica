@@ -22,7 +22,6 @@ public class Produto {
     private String status;
     private int unidadeEmEstoque;
     private String manufaturador;
-
     @Transient
     private MultipartFile imagemProduto;
 
