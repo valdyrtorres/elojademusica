@@ -15,4 +15,6 @@ public interface ProdutoDao {
     List<Produto> getTodosProdutos();
 
     void deleteProduto(String id);
+
+    void editarProduto(Produto produto);
 }

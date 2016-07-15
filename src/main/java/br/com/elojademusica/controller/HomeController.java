@@ -146,7 +146,7 @@ public class HomeController {
             }
         }
 
-        produtoDao.ed
+        produtoDao.editarProduto(produto);
     }
 
 }

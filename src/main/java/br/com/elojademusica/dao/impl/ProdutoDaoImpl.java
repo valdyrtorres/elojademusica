@@ -27,6 +27,12 @@ public class ProdutoDaoImpl implements ProdutoDao {
         session.flush();
     }
 
+    public void editarProduto(Produto produto) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(produto);
+        session.flush();
+    }
+
     public Produto getProdutoPorId(String id) {
         Session session = sessionFactory.getCurrentSession();
         Produto produto = (Produto) session.get(Produto.class, id);
