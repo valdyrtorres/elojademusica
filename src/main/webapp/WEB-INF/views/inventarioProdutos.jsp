@@ -40,6 +40,8 @@
                         <span class="glyphicon glyphicon-info-sign"></span></a>
                         <a href="<spring:url value="/admin/inventarioProdutos/deleteProduto/${produto.idProduto}" />">
                             <span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="<spring:url value="/admin/inventarioProdutos/editarProduto/${produto.idProduto}" />">
+                            <span class="glyphicon glyphicon-pencil"></span></a>
                     </td>
                 </tr>
             </c:forEach>

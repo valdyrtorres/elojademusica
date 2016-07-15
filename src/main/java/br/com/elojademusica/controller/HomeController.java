@@ -90,9 +90,9 @@ public class HomeController {
         MultipartFile imagemProduto = produto.getImagemProduto();
 
         String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
-        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\"+produto.getIdProduto()+".png");
+        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\" + produto.getIdProduto() + ".png");
 
-        if(imagemProduto != null && !imagemProduto.isEmpty()) {
+        if (imagemProduto != null && !imagemProduto.isEmpty()) {
             try {
                 imagemProduto.transferTo(new File(caminho.toString()));
             } catch (Exception e) {
@@ -107,7 +107,7 @@ public class HomeController {
     @RequestMapping("/admin/inventarioProdutos/deleteProduto/{id}")
     public String deleteProduto(@PathVariable String id, Model model, HttpServletRequest request) {
         String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
-        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\"+id+".png");
+        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\" + id + ".png");
 
         if (Files.exists(caminho)) {
             try {
@@ -120,6 +120,33 @@ public class HomeController {
         produtoDao.deleteProduto(id);
 
         return "redirect:/admin/inventarioProdutos";
+    }
+
+    @RequestMapping("/admin/inventarioProdutos/editarProduto/{id}")
+    public String editarProduto(@PathVariable("id") String id, Model model) {
+        Produto produto = produtoDao.getProdutoPorId(id);
+
+        model.addAttribute(produto);
+
+        return "editarProduto";
+    }
+
+    @RequestMapping("/admin/inventarioProdutos/editarProduto",method=RequestMethod.POST)
+    public String editarProduto(@ModelAttribute("produto") Produto produto, Model model, HttpServletRequest request) {
+        MultipartFile imagemProduto = produto.getImagemProduto();
+
+        String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
+        path = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\" + produto.getIdProduto() + ".png");
+
+        if(imagemProduto != null && (imagemProduto.isEmpty())) {
+            try {
+
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
+
+        produtoDao.ed
     }
 
 }
