@@ -131,22 +131,24 @@ public class HomeController {
         return "editarProduto";
     }
 
-    @RequestMapping("/admin/inventarioProdutos/editarProduto",method=RequestMethod.POST)
+    @RequestMapping(value = "/admin/inventarioProdutos/editarProduto",method=RequestMethod.POST)
     public String editarProduto(@ModelAttribute("produto") Produto produto, Model model, HttpServletRequest request) {
         MultipartFile imagemProduto = produto.getImagemProduto();
 
         String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
-        path = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\" + produto.getIdProduto() + ".png");
+        caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\" + produto.getIdProduto() + ".png");
 
         if(imagemProduto != null && (imagemProduto.isEmpty())) {
             try {
 
             } catch (Exception e) {
-                throw new RuntimeException();
+                throw new RuntimeException("Falha ao salvar imagem do produto.", e);
             }
         }
 
         produtoDao.editarProduto(produto);
+
+        return "redirect:/admin/inventarioProdutos";
     }
 
 }
