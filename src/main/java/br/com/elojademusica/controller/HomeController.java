@@ -138,8 +138,9 @@ public class HomeController {
         String diretorioRaiz = request.getSession().getServletContext().getRealPath("/");
         caminho = Paths.get(diretorioRaiz + "\\WEB-INF\\resources\\imagens\\" + produto.getIdProduto() + ".png");
 
-        if(imagemProduto != null && (imagemProduto.isEmpty())) {
+        if(imagemProduto != null && !imagemProduto.isEmpty()) {
             try {
+                imagemProduto.transferTo(new File(caminho.toString()));
 
             } catch (Exception e) {
                 throw new RuntimeException("Falha ao salvar imagem do produto.", e);
